@@ -14,8 +14,8 @@ import com.crm.qa.utils.TestUtils;
 
 public class TestBase {
 
-	static WebDriver driver;
-	static Properties pros;
+	public static WebDriver driver;
+	public static Properties pros;
 	
 	public TestBase(){
 		
@@ -23,6 +23,7 @@ public class TestBase {
 			pros=new Properties();
 			FileInputStream ip=new FileInputStream("C:\\Users\\Kalmegh\\workspace\\FreeCRM\\src\\main\\java"
 					+ "\\com\\crm\\qa\\config\\config.properties");
+			pros.load(ip);
 		}
 		catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -35,9 +36,9 @@ public class TestBase {
 		
 	public static void initialization(){
 	
-		String Browsername=pros.getProperty("Browser");
+		String Browsername=pros.getProperty("browser");
 		if(Browsername.equals("chrome")){
-			System.setProperty("webdriver.chrome.driver","C:\\Users\\Kalmegh\\Desktop\\Selenium\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver","C:\\Users\\Kalmegh\\Desktop\\Selenium\\Chorme\\chromedriver.exe");
 			driver = new ChromeDriver();
 
 		}else
@@ -47,11 +48,12 @@ public class TestBase {
 	
 			}
 		
+		driver.get(pros.getProperty("url"));
 		driver.manage().window().maximize();
 		driver.manage().timeouts().pageLoadTimeout(TestUtils.PAGE_LOAD_TIME_OUT, TimeUnit.SECONDS);
 		driver.manage().timeouts().implicitlyWait(TestUtils.IMPLICITY_TIME_OUT, TimeUnit.SECONDS);
 		driver.manage().deleteAllCookies();
-		driver.get(pros.getProperty("url"));
+		
 	}
 
 }
