@@ -6,9 +6,12 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.crm.qa.utils.TestUtils;
 
@@ -16,7 +19,7 @@ public class TestBase {
 
 	public static WebDriver driver;
 	public static Properties pros;
-	
+	public static WebDriverWait wait;
 	public TestBase(){
 		
 		try {
@@ -53,7 +56,7 @@ public class TestBase {
 		driver.manage().timeouts().pageLoadTimeout(TestUtils.PAGE_LOAD_TIME_OUT, TimeUnit.SECONDS);
 		driver.manage().timeouts().implicitlyWait(TestUtils.IMPLICITY_TIME_OUT, TimeUnit.SECONDS);
 		driver.manage().deleteAllCookies();
-		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(""))).click();;
 	}
 
 }
